@@ -2,7 +2,7 @@ import 'package:app_project_flutter/models/events.dart';
 import 'package:flutter/material.dart';
 
 class EventGrid extends StatelessWidget {
-  final List<Event> events;
+  final List<EventModel> events;
 
   EventGrid({required this.events});
 
@@ -13,8 +13,8 @@ class EventGrid extends StatelessWidget {
       children: [
         for (var event in events)
           _EventTile(
-            imageUrl: event.fields.imageCouverture!.id!,
-            title: event.fields.title!,
+            imageUrl: event.imageUrl,
+            title: event.title,
           ),
       ],
     );
@@ -44,7 +44,7 @@ class _EventTile extends StatelessWidget {
             alignment: Alignment.bottomCenter,
             child: Container(
               height: 35,
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                 borderRadius: BorderRadius.only(
                   bottomLeft: Radius.circular(8.0),
                   bottomRight: Radius.circular(8.0),
@@ -55,7 +55,7 @@ class _EventTile extends StatelessWidget {
                 child: Text(
                   title,
                   textAlign: TextAlign.center,
-                  style: TextStyle(color: Colors.white),
+                  style: const TextStyle(color: Colors.white),
                 ),
               ),
             ),

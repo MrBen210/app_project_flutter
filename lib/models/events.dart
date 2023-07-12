@@ -1,106 +1,68 @@
 import 'dart:convert';
 
-Event eventFromJson(String str) => Event.fromJson(json.decode(str));
+import 'dart:convert';
 
-String eventToJson(Event data) => json.encode(data.toJson());
+class EventModel {
+  final String id;
+  final String title;
+  final String description;
+  final String imageUrl;
+  final String startDate;
+  final String endDate;
+  final List<String> tags;
+  final String addressName;
+  final String addressZipCode;
+  final String addressCity;
+  final bool pmr;
+  final bool blind;
+  final bool deaf;
+  final String transport;
+  final String priceType;
+  final String accessType;
+  final String updatedAt;
+  final String programs;
 
-class Event {
-  int nhits;
-  List<Record> records;
-
-  Event({
-    required this.nhits,
-    required this.records,
+  EventModel({
+    required this.id,
+    required this.title,
+    required this.description,
+    required this.imageUrl,
+    required this.startDate,
+    required this.endDate,
+    required this.tags,
+    required this.addressName,
+    required this.addressZipCode,
+    required this.addressCity,
+    required this.pmr,
+    required this.blind,
+    required this.deaf,
+    required this.transport,
+    required this.priceType,
+    required this.accessType,
+    required this.updatedAt,
+    required this.programs,
   });
 
-  factory Event.fromJson(Map<String, dynamic> json) => Event(
-    nhits: json["nhits"],
-    records: List<Record>.from(
-        json["records"].map((x) => Record.fromJson(x["fields"]))),
-  );
-
-  get fields => Fields();
-
-  Map<String, dynamic> toJson() => {
-    "nhits": nhits,
-    "records": List<dynamic>.from(records.map((x) => x.toJson())),
-  };
-}
-
-class Record {
-  Fields fields;
-
-  Record({
-    required this.fields,
-  });
-
-  factory Record.fromJson(Map<String, dynamic> json) => Record(
-    fields: Fields.fromJson(json),
-  );
-
-  Map<String, dynamic> toJson() => {
-    "fields": fields.toJson(),
-  };
-}
-
-class Fields {
-  String? title;
-  DateTime? dateStart;
-  DateTime? dateEnd;
-  String? priceType;
-  String? addressName;
-  ImageCouverture? imageCouverture;
-
-  Fields({
-    this.title,
-    this.dateStart,
-    this.dateEnd,
-    this.priceType,
-    this.addressName,
-    this.imageCouverture,
-  });
-
-  factory Fields.fromJson(Map<String, dynamic> json) => Fields(
-    title: json["title"],
-    dateStart: json["date_start"] == null
-        ? null
-        : DateTime.parse(json["date_start"]),
-    dateEnd: json["date_end"] == null
-        ? null
-        : DateTime.parse(json["date_end"]),
-    priceType: json["price_type"],
-    addressName: json["address_name"],
-    imageCouverture: json["image_couverture"] == null
-        ? null
-        : ImageCouverture.fromJson(json["image_couverture"]),
-  );
-
-  Map<String, dynamic> toJson() => {
-    "title": title,
-    "date_start": dateStart?.toIso8601String(),
-    "date_end": dateEnd?.toIso8601String(),
-    "price_type": priceType,
-    "address_name": addressName,
-    "image_couverture": imageCouverture?.toJson(),
-  };
-}
-
-class ImageCouverture {
-  String? id;
-  String? format;
-
-  ImageCouverture({
-    this.id,
-    this.format,
-  });
-
-  factory ImageCouverture.fromJson(Map<String, dynamic> json) => ImageCouverture(
-    id: json["id"],
-    format: json["format"],
-  );
-
-  Map<String, dynamic> toJson() => {
-    "id": id,
-    "format": format,
-  };
+  factory EventModel.fromJson(Map<String, dynamic> json) {
+    return EventModel(
+      id: json['recordid'],
+      title: json['fields']['title'],
+      description: json['fields']['description'],
+      imageUrl: json['fields']['imageurl'],
+      startDate: json['fields']['date_start'],
+      endDate: json['fields']['date_end'],
+      tags: List<String>.from(json['fields']['tags']),
+      addressName: json['fields']['address_name'],
+      addressZipCode: json['fields']['address_zipcode'],
+      addressCity: json['fields']['address_city'],
+      pmr: json['fields']['pmr'],
+      blind: json['fields']['blind'],
+      deaf: json['fields']['deaf'],
+      transport: json['fields']['transport'],
+      priceType: json['fields']['price_type'],
+      accessType: json['fields']['access_type'],
+      updatedAt: json['fields']['updated_at'],
+      programs: json['fields']['programs'],
+    );
+  }
 }

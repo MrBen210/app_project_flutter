@@ -2,13 +2,14 @@ import 'package:flutter/material.dart';
 import '../Utils/constants.dart';
 import '../models/events.dart';
 import '../services/event_api.dart';
+import '../widgets/events_grid.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder<Event>(
+    return FutureBuilder<List<EventModel>>(
       future: getEventsFromApi(),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
@@ -16,8 +17,12 @@ class HomePage extends StatelessWidget {
             child: CircularProgressIndicator(),
           );
         } else if (snapshot.hasError) {
+          return Center(
+            child: Text("Error loading events: ${snapshot.error.toString()}"),
+          );
+        } else if (snapshot.data == null) {
           return const Center(
-            child: Text("Error loading events"),
+            child: Text("No events available"),
           );
         } else {
           return Scaffold(
@@ -28,12 +33,13 @@ class HomePage extends StatelessWidget {
             body: SafeArea(
               child: Container(
                 color: backgroundColor,
+                child: EventGrid(events: snapshot.data!),
               ),
             ),
           );
         }
+
       },
     );
   }
 }
-
