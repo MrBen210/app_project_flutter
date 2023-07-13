@@ -20,11 +20,7 @@ class HomePage extends StatelessWidget {
           return Center(
             child: Text("Error loading events: ${snapshot.error.toString()}"),
           );
-        } else if (snapshot.data == null) {
-          return const Center(
-            child: Text("No events available"),
-          );
-        } else {
+        } else if (snapshot.hasData) {
           return Scaffold(
             appBar: AppBar(
               title: const Text("Event"),
@@ -37,8 +33,11 @@ class HomePage extends StatelessWidget {
               ),
             ),
           );
+        } else {
+          return const Center(
+            child: Text("No events available"),
+          );
         }
-
       },
     );
   }
