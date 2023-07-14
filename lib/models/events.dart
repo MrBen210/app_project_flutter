@@ -1,68 +1,56 @@
-import 'dart:convert';
-
-import 'dart:convert';
+import 'dart:ffi';
 
 class EventModel {
-  final String id;
+  final Int recordid;
   final String title;
   final String description;
   final String imageUrl;
   final String startDate;
   final String endDate;
-  final List<String> tags;
-  final String addressName;
-  final String addressZipCode;
-  final String addressCity;
-  final bool pmr;
-  final bool blind;
-  final bool deaf;
   final String transport;
   final String priceType;
   final String accessType;
-  final String updatedAt;
   final String programs;
 
   EventModel({
-    required this.id,
+    required this.recordid,
     required this.title,
     required this.description,
     required this.imageUrl,
     required this.startDate,
     required this.endDate,
-    required this.tags,
-    required this.addressName,
-    required this.addressZipCode,
-    required this.addressCity,
-    required this.pmr,
-    required this.blind,
-    required this.deaf,
     required this.transport,
     required this.priceType,
     required this.accessType,
-    required this.updatedAt,
     required this.programs,
   });
 
   factory EventModel.fromJson(Map<String, dynamic> json) {
+    final fields = json['fields'];
+
+    print('Id: ${json['recordid']}');
+    print('Title: ${fields?['title']}');
+    print('Description: ${fields?['description']}');
+    print('Image URL: ${fields?['imageurl']}');
+    print('Start Date: ${fields?['date_start']}');
+    print('End Date: ${fields?['date_end']}');
+    print('Transport: ${fields?['transport']}');
+    print('Price Type: ${fields?['price_type']}');
+    print('Access Type: ${fields?['access_type']}');
+    print('Programs: ${fields?['programs']}');
+
     return EventModel(
-      id: json['recordid'],
-      title: json['fields']['title'],
-      description: json['fields']['description'],
-      imageUrl: json['fields']['imageurl'],
-      startDate: json['fields']['date_start'],
-      endDate: json['fields']['date_end'],
-      tags: List<String>.from(json['fields']['tags']),
-      addressName: json['fields']['address_name'],
-      addressZipCode: json['fields']['address_zipcode'],
-      addressCity: json['fields']['address_city'],
-      pmr: json['fields']['pmr'],
-      blind: json['fields']['blind'],
-      deaf: json['fields']['deaf'],
-      transport: json['fields']['transport'],
-      priceType: json['fields']['price_type'],
-      accessType: json['fields']['access_type'],
-      updatedAt: json['fields']['updated_at'],
-      programs: json['fields']['programs'],
+      recordid: json['recordid'],
+      title: fields?['title'] ?? 'Title not available',
+      description: fields?['description'] ?? 'Description not available',
+      imageUrl: fields?['imageurl'] ?? 'No image',
+      startDate: fields?['date_start'] ?? 'Start date not available',
+      endDate: fields?['date_end'] ?? 'End date not available',
+      transport: fields?['transport'] ?? 'Transport not available',
+      priceType: fields?['price_type'] ?? 'Price type not available',
+      accessType: fields?['access_type'] ?? 'Access type not available',
+      programs: fields?['programs'] ?? 'Programs not available',
     );
   }
+
 }

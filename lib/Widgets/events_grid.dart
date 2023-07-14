@@ -1,10 +1,10 @@
-import 'package:app_project_flutter/models/events.dart';
 import 'package:flutter/material.dart';
+import 'package:app_project_flutter/models/events.dart';
 
-class EventGrid extends StatelessWidget {
+class EventsGrid extends StatelessWidget {
   final List<EventModel> events;
 
-  EventGrid({required this.events});
+  EventsGrid({required this.events});
 
   @override
   Widget build(BuildContext context) {
@@ -15,19 +15,23 @@ class EventGrid extends StatelessWidget {
           _EventTile(
             imageUrl: event.imageUrl,
             title: event.title,
-          ),
+          )
       ],
     );
   }
 }
 
 class _EventTile extends StatelessWidget {
-  final String imageUrl, title;
+  final String imageUrl;
+  final String title;
 
   _EventTile({required this.imageUrl, required this.title});
 
   @override
   Widget build(BuildContext context) {
+    print('Event Title: $title'); // Print the event title
+    print('Image URL: $imageUrl'); // Print the image URL
+
     return Padding(
       padding: EdgeInsets.all(10.0),
       child: Stack(
@@ -37,25 +41,21 @@ class _EventTile extends StatelessWidget {
             height: double.infinity,
             child: ClipRRect(
               borderRadius: BorderRadius.circular(8.0),
-              child: Image.network(imageUrl, fit: BoxFit.cover),
+              child: imageUrl.isNotEmpty
+                  ? Image.network(imageUrl, fit: BoxFit.cover)
+                  : Placeholder(), // Image par défaut ou Placeholder
             ),
           ),
           Align(
             alignment: Alignment.bottomCenter,
             child: Container(
+              color: Colors.black.withOpacity(0.6),
               height: 35,
-              decoration: const BoxDecoration(
-                borderRadius: BorderRadius.only(
-                  bottomLeft: Radius.circular(8.0),
-                  bottomRight: Radius.circular(8.0),
-                ),
-                color: Colors.black54,
-              ),
               child: Center(
                 child: Text(
                   title,
                   textAlign: TextAlign.center,
-                  style: const TextStyle(color: Colors.white),
+                  style: TextStyle(color: Colors.green, fontSize: 16.0, fontWeight: FontWeight.bold),
                 ),
               ),
             ),
@@ -65,3 +65,4 @@ class _EventTile extends StatelessWidget {
     );
   }
 }
+
