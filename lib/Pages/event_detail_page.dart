@@ -14,6 +14,7 @@ class EventDetailPage extends StatelessWidget {
         backgroundColor: Colors.black,
       ),
       body: Container(
+        color: Colors.black12,
         padding: EdgeInsets.all(16.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,

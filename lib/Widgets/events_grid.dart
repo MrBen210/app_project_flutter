@@ -48,17 +48,17 @@ class _EventTile extends StatelessWidget {
           Align(
             alignment: Alignment.bottomCenter,
             child: Container(
-              color: Colors.black.withOpacity(0.60),
-              height: 35,
-              child: Center(
-                child: Text(
-                  title,
-                  textAlign: TextAlign.center,
-                  style: TextStyle(color: Colors.white, fontSize: 16.0, fontWeight: FontWeight.bold),
+                color: Colors.black.withOpacity(0.60),
+                height: 35,
+                child: Center(
+                  child: Text(
+                    title,
+                    textAlign: TextAlign.center,
+                    style: TextStyle(color: Colors.white, fontSize: 16.0, fontWeight: FontWeight.bold),
+                  ),
                 ),
               ),
             ),
-          ),
         ],
       ),
     );

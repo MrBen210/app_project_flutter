@@ -28,7 +28,7 @@ class _HomePageState extends State<HomePage> {
         backgroundColor: Colors.black,
       ),
       body: Container(
-        color: Colors.white,
+        color: Colors.black12,
         child: FutureBuilder<List<Event>>(
           future: _eventsFuture,
           builder: (context, snapshot) {
