@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:app_project_flutter/models/events.dart';
 
 class EventsGrid extends StatelessWidget {
-  final List<EventModel> events;
+  final List<Event> events;
 
   EventsGrid({required this.events});
 

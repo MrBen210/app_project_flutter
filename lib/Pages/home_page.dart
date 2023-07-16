@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:app_project_flutter/services/event_api.dart';
 import 'package:app_project_flutter/models/events.dart';
-import 'package:app_project_flutter/Widgets/events_grid.dart';
+import 'package:app_project_flutter/widgets/events_grid.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -11,7 +11,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  late Future<List<EventModel>> _eventsFuture;
+  late Future<List<Event>> _eventsFuture;
 
   @override
   void initState() {
@@ -28,7 +28,7 @@ class _HomePageState extends State<HomePage> {
       ),
       body: Container(
         color: Colors.white,
-        child: FutureBuilder<List<EventModel>>(
+        child: FutureBuilder<List<Event>>(
           future: _eventsFuture,
           builder: (context, snapshot) {
             if (snapshot.connectionState == ConnectionState.waiting) {
@@ -36,8 +36,8 @@ class _HomePageState extends State<HomePage> {
             } else if (snapshot.hasError) {
               return Center(child: Text('Erreur : ${snapshot.error}'));
             } else if (snapshot.hasData) {
-              List<EventModel>? events = snapshot.data;
-              print('Events data received: $events'); // Print the events data received
+              List<Event>? events = snapshot.data;
+              print('Events data received: $events');
               return EventsGrid(events: events!);
             } else {
               return Center(child: Text('Aucun événement trouvé.'));
