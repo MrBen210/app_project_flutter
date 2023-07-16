@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:app_project_flutter/models/events.dart';
+import 'package:app_project_flutter/Pages/event_detail_page.dart';
 
 class EventsGrid extends StatelessWidget {
   final List<Event> events;
@@ -12,9 +13,12 @@ class EventsGrid extends StatelessWidget {
       crossAxisCount: 2,
       children: [
         for (var event in events)
-          _EventTile(
-            imageUrl: event.imageUrl,
-            title: event.title,
+          GestureDetector(
+            onTap: () => Navigator.push(context, MaterialPageRoute(builder: (context) => EventDetailPage(event: event,))),
+            child: _EventTile(
+              imageUrl: event.imageUrl,
+              title: event.title,
+            ),
           )
       ],
     );
