@@ -25,15 +25,14 @@ class _EventTile extends StatelessWidget {
   final String imageUrl;
   final String title;
 
-  _EventTile({required this.imageUrl, required this.title});
+  const _EventTile({required this.imageUrl, required this.title});
 
   @override
   Widget build(BuildContext context) {
-    print('Event Title: $title'); // Print the event title
-    print('Image URL: $imageUrl'); // Print the image URL
+
 
     return Padding(
-      padding: EdgeInsets.all(10.0),
+      padding: const EdgeInsets.all(10.0),
       child: Stack(
         children: [
           Container(
@@ -43,19 +42,19 @@ class _EventTile extends StatelessWidget {
               borderRadius: BorderRadius.circular(8.0),
               child: imageUrl.isNotEmpty
                   ? Image.network(imageUrl, fit: BoxFit.cover)
-                  : Placeholder(), // Image par défaut ou Placeholder
+                  : Placeholder(),
             ),
           ),
           Align(
             alignment: Alignment.bottomCenter,
             child: Container(
-              color: Colors.black.withOpacity(0.6),
+              color: Colors.black.withOpacity(0.60),
               height: 35,
               child: Center(
                 child: Text(
                   title,
                   textAlign: TextAlign.center,
-                  style: TextStyle(color: Colors.green, fontSize: 16.0, fontWeight: FontWeight.bold),
+                  style: TextStyle(color: Colors.white, fontSize: 16.0, fontWeight: FontWeight.bold),
                 ),
               ),
             ),

@@ -19,12 +19,6 @@ Future<List<Event>> getEventsFromApi() async {
       events.add(event);
       //print('Event: $event');
     }
-
-    print('Events data:');
-    for (var event in events) {
-      print(event);
-    }
-    print(events.length);
     return events;
   } else {
     return [];

@@ -1,3 +1,4 @@
+
 import 'package:flutter/material.dart';
 import 'package:app_project_flutter/services/event_api.dart';
 import 'package:app_project_flutter/models/events.dart';
@@ -23,7 +24,7 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('ParisEvenementHomePage'),
+        title: const Text('ParisEvenementHomePage'),
         backgroundColor: Colors.black,
       ),
       body: Container(
