@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:app_project_flutter/models/events.dart';
+import 'package:html/parser.dart';
 
 class EventDetailPage extends StatelessWidget {
   EventDetailPage({required this.event});
@@ -75,10 +76,18 @@ class EventDescription extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final parsedDescription = parseHtmlString(descriptionText);
+
     return Text(
-      descriptionText,
+      parsedDescription,
       textAlign: TextAlign.start,
     );
+  }
+
+  String parseHtmlString(String htmlString) {
+    final document = parse(htmlString);
+    final parsedText = parseFragment(document.body!.text).text;
+    return parsedText ?? '' ;
   }
 }
 
