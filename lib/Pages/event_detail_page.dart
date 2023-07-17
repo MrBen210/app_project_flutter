@@ -91,6 +91,16 @@ class EventDescription extends StatelessWidget {
   }
 }
 
+class EventTag extends StatelessWidget {
+  const EventTag({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container();
+  }
+}
+
+
 class EventUtils extends StatelessWidget {
   final String price;
 
@@ -113,15 +123,5 @@ class EventUtils extends StatelessWidget {
         ],
       ),
     );
-  }
-}
-
-
-class EventTag extends StatelessWidget {
-  const EventTag({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Container();
   }
 }
