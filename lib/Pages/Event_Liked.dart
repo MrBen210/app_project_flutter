@@ -7,10 +7,12 @@ class EventsLiked extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Events Liked'),
+        title: const Text('Favoris'),
         backgroundColor: Colors.black,
       ),
-      body: const Placeholder(),
+      body: Container(
+        color: Colors.orange,
+      ),
 
     );
   }

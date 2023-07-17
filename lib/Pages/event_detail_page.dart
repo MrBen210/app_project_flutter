@@ -35,7 +35,7 @@ class EventDetail extends StatelessWidget {
         const SizedBox(height: 20),
         Padding(
           padding: const EdgeInsets.all(16.0),
-          child: EventUtils(),
+          child: EventUtils(price: '',),
         ),
         Padding(
           padding: const EdgeInsets.all(16.0),
@@ -92,17 +92,36 @@ class EventDescription extends StatelessWidget {
 }
 
 class EventUtils extends StatelessWidget {
+  final String price;
+
+  EventUtils({required this.price});
+
   @override
   Widget build(BuildContext context) {
-    return Placeholder();
+    return Container(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            'Prix : $price',
+            style: const TextStyle(
+              fontWeight: FontWeight.bold,
+              fontSize: 16,
+            ),
+          ),
+
+        ],
+      ),
+    );
   }
 }
+
 
 class EventTag extends StatelessWidget {
   const EventTag({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Placeholder();
+    return Container();
   }
 }
