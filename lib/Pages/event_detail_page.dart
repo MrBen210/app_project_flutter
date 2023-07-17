@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:app_project_flutter/models/events.dart';
 
-//------------------------------------------------------------------------------
-//------------------ Widget represenant l'ecran Detail -------------------------
-//------------------------------------------------------------------------------
 class EventDetailPage extends StatelessWidget {
   EventDetailPage({required this.event});
   final Event event;
@@ -18,54 +15,45 @@ class EventDetailPage extends StatelessWidget {
       body: Container(
         color: Colors.black12,
         height: double.infinity,
-        child: EventDetail(event),
+        child: EventDetail(event: event),
       ),
     );
   }
 }
 
-//------------------------------------------------------------------------------
-//------------------ Widget affichant la liste d'elements -----------------------
-//------------------------------------------------------------------------------
-
 class EventDetail extends StatelessWidget {
   final Event event;
-   EventDetail(this.event);
 
-   @override
+  EventDetail({required this.event});
+
+  @override
   Widget build(BuildContext context) {
     return ListView(
-      children: const [
-
-        //  faire appel à l'image de couverture//
-
+      children: [
+        EventCoverImage(coverImagee: event.imageUrl),
         SizedBox(height: 20),
-
-        Padding(padding: const EdgeInsets.all(16.0),
+        Padding(
+          padding: const EdgeInsets.all(16.0),
           child: EventUtils(),
         ),
-
-        Padding(padding: const EdgeInsets.all(16.0),
-            child: EventDescription(),
+        Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: EventDescription(descriptionText: event.description),
         ),
         SizedBox(height: 50),
-
-        Padding(padding: const EdgeInsets.all(16.0),
+        Padding(
+          padding: const EdgeInsets.all(16.0),
           child: EventTag(),
         ),
-
       ],
     );
   }
 }
 
-//------------------------------------------------------------------------------
-//------------------ Widget affichant l'image de couvertue ----------------------
-//------------------------------------------------------------------------------
-
 class EventCoverImage extends StatelessWidget {
-  final coverImagee;
-  EventCoverImage({this.coverImagee});
+  final String coverImagee;
+
+  EventCoverImage({required this.coverImagee});
 
   @override
   Widget build(BuildContext context) {
@@ -73,51 +61,39 @@ class EventCoverImage extends StatelessWidget {
       width: double.infinity,
       height: 200,
       child: Image.network(
-          coverImagee,
+        coverImagee,
         fit: BoxFit.fitWidth,
       ),
     );
   }
 }
 
-
-//------------------------------------------------------------------------------
-//------------------ Widget affichant la description de  ------------------------
-//------------------------------------------------------------------------------
 class EventDescription extends StatelessWidget {
-  const EventDescription({Key? key}) : super(key: key);
+  final String descriptionText;
+
+  EventDescription({required this.descriptionText});
 
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return Text(
+      descriptionText,
+      textAlign: TextAlign.start,
+    );
   }
 }
-
-//------------------------------------------------------------------------------
-//------------------ Widget affichant les infos utiles --------------------------
-//------------------------------------------------------------------------------
 
 class EventUtils extends StatelessWidget {
-  const EventUtils({Key? key}) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return Placeholder();
   }
 }
-
-
-//------------------------------------------------------------------------------
-//------------------ Widget affichant les infos tags ----------------------------
-//------------------------------------------------------------------------------
 
 class EventTag extends StatelessWidget {
   const EventTag({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return Placeholder();
   }
 }
-
-
