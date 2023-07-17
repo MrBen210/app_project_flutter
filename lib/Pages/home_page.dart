@@ -28,13 +28,28 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('ParisEvenementHomePage'),
+        title: const Text('Paris Evenements '),
         backgroundColor: Colors.black,
         actions: [
           PopupMenuButtonWidget(
             selectedSort: _selectedSort,
             selectedPriceFilter: _selectedPriceFilter,
             onSelectedFilter: _onSelectedFilter,
+          ),
+        ],
+      ),
+      bottomNavigationBar: BottomNavigationBar(
+        backgroundColor: Colors.black,
+        selectedItemColor: Colors.orange,
+        unselectedItemColor: Colors.grey,
+        items: const [
+          BottomNavigationBarItem(
+            icon: Icon(Icons.home),
+            label: 'Accueil',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.favorite),
+            label: 'J\'aime',
           ),
         ],
       ),
@@ -62,4 +77,6 @@ class _HomePageState extends State<HomePage> {
       });
     }
   }
+
+
 }
