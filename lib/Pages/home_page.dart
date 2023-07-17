@@ -2,9 +2,27 @@ import 'package:flutter/material.dart';
 import 'package:app_project_flutter/services/event_api.dart';
 import 'package:app_project_flutter/models/events.dart';
 import '../Utils/hepers.dart';
+import '../Widgets/CustomBottomNavigationBar.dart';
 import '../Widgets/events_future_builder.dart';
 import '../Widgets/popup_menu_button.dart';
+import 'event_liked.dart';
 
+void main() {
+  runApp(MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'Your App',
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
+      ),
+      home: HomePage(),
+    );
+  }
+}
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -26,30 +44,24 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
+    return CustomBottomNavigationBar(
+      screens: [
+        HomePageContent(),
+        EventsLiked(),
+      ],
+    );
+  }
+
+  Widget HomePageContent() {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Paris Evenements '),
+        title: const Text('Paris Evenements'),
         backgroundColor: Colors.black,
         actions: [
           PopupMenuButtonWidget(
             selectedSort: _selectedSort,
             selectedPriceFilter: _selectedPriceFilter,
             onSelectedFilter: _onSelectedFilter,
-          ),
-        ],
-      ),
-      bottomNavigationBar: BottomNavigationBar(
-        backgroundColor: Colors.black,
-        selectedItemColor: Colors.orange,
-        unselectedItemColor: Colors.grey,
-        items: const [
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            label: 'Accueil',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.favorite),
-            label: 'J\'aime',
           ),
         ],
       ),
@@ -77,6 +89,4 @@ class _HomePageState extends State<HomePage> {
       });
     }
   }
-
-
 }

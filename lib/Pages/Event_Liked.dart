@@ -5,7 +5,13 @@ class EventsLiked extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Events Liked'),
+        backgroundColor: Colors.black,
+      ),
+      body: const Placeholder(),
+
+    );
   }
 }
-

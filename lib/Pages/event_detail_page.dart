@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:app_project_flutter/models/events.dart';
-
-
+import 'package:html/parser.dart';
 
 class EventDetailPage extends StatelessWidget {
-  final Event event;
-
   EventDetailPage({required this.event});
+  final Event event;
 
   @override
   Widget build(BuildContext context) {
@@ -34,10 +32,19 @@ class EventDetail extends StatelessWidget {
     return ListView(
       children: [
         EventCoverImage(coverImagee: event.imageUrl),
-        SizedBox(height: 20),
+        const SizedBox(height: 20),
         Padding(
           padding: const EdgeInsets.all(16.0),
-          child: EventDescription(description: event.description),
+          child: EventUtils(),
+        ),
+        Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: EventDescription(descriptionText: event.description),
+        ),
+        const SizedBox(height: 50),
+        const Padding(
+          padding: EdgeInsets.all(16.0),
+          child: EventTag(),
         ),
       ],
     );
@@ -45,34 +52,57 @@ class EventDetail extends StatelessWidget {
 }
 
 class EventCoverImage extends StatelessWidget {
-  final String? coverImagee;
+  final String coverImagee;
 
   EventCoverImage({required this.coverImagee});
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return  Container(
       width: double.infinity,
       height: 200,
-      child: coverImagee != null
-          ? Image.network(
-        coverImagee!,
+      child: Image.network(
+        coverImagee,
         fit: BoxFit.fitWidth,
-      )
-          : Placeholder(), // Placeholder ou image par défaut si coverImagee est null
+      ),
     );
   }
 }
 
 class EventDescription extends StatelessWidget {
-  final String? description;
+  final String descriptionText;
 
-  EventDescription({required this.description});
+  EventDescription({required this.descriptionText});
 
   @override
   Widget build(BuildContext context) {
-    return description != null
-        ? Text(description!)
-        : Placeholder(); // Placeholder ou texte par défaut si description est null
+    final parsedDescription = parseHtmlString(descriptionText);
+
+    return Text(
+      parsedDescription,
+      textAlign: TextAlign.start,
+    );
+  }
+
+  String parseHtmlString(String htmlString) {
+    final document = parse(htmlString);
+    final parsedText = parseFragment(document.body!.text).text;
+    return parsedText ?? '' ;
+  }
+}
+
+class EventUtils extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Placeholder();
+  }
+}
+
+class EventTag extends StatelessWidget {
+  const EventTag({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Placeholder();
   }
 }
