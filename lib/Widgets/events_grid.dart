@@ -14,7 +14,7 @@ class EventsGrid extends StatelessWidget {
       children: [
         for (var event in events)
           GestureDetector(
-            onTap: () => Navigator.push(context, MaterialPageRoute(builder: (context) => EventDetailPage(event: event,))),
+            onTap: () => Navigator.push(context, MaterialPageRoute(builder: (context) => EventDetailPage(event: event),),),
             child: _EventTile(
               imageUrl: event.imageUrl,
               title: event.title,
